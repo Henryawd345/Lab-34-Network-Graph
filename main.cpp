@@ -243,6 +243,24 @@ int main() {
         "Handles client API calls"
     };
 
+    int choice = -1;
+    int startNode = 0;
+
+    do{
+        cout << "\nData Center Network Menu:\n";
+        cout << "[1] Display network topology\n";
+        cout << "[2] Run DFS from node 0 (Gateway Router)\n";
+        cout << "[3] Run BFS from node 0 (Gateway Router)\n";
+        cout << "[4] Show shortest paths from node 0\n";
+        cout << "[5] Show Minimum Spanning Tree (MST)\n";
+        cout << "[0] Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cout << endl;
+
+
+    }
+
     g.printNetworkTopology(nodeNames, nodeRoles);
 
     cout << "Network Trace (DFS) from Node 0 (Gateway Router):\n";
