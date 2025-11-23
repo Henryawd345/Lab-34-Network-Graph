@@ -29,14 +29,61 @@ public:
                 cout << "(" << edge.first << ", " << edge.second << ") ";
             }
             cout << endl;
-            
         }
-        
-
-
     }
 
-}
+    void DFS(int start) const{
+        vector<bool> visited(V, false);
+        stack<int> st;
+
+        cout << "DFS starting from vertex " << start << ":" << endl;
+
+        while (!st.empty()) {
+            int node = st.top();
+            st.pop();
+
+            if (!visited[node]) {
+                visited[node] = true;
+                cout << node << " ";
+
+                for (const auto &edge : adj[node]){
+                    int neighbor = edge.first;
+                    if (!visited[neighbor]) {
+                        st.push(neighbor);
+                    }
+                }
+            }
+        }
+        cout << endl;
+    }
+
+    void BFS(int start) const {
+        vector<bool> visited(V, false);
+        queue<int> q;
+
+        visited[start] = true;
+        q.push(start);
+
+        cout << "BFS starting from vertex " << start << ":" << endl;
+
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            cout << node << " ";
+
+            for (const auto &edge : adj[node]) {
+                int neighbor = edge.first;
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    q.push(neighbor);
+                }
+            }
+        }
+        cout << endl;
+    }
+};
+
+
 
 
 int main() {
