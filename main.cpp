@@ -258,24 +258,42 @@ int main() {
         cin >> choice;
         cout << endl;
 
+        switch (choice) {
+        case 1:
+            g.printNetworkTopology(nodeNames, nodeRoles);
+            break;
 
-    }
+        case 2:
+            cout << "Network Trace (DFS) from Node 0 (Gateway Router):\n";
+            cout << "Purpose: Deep diagnostic path through the network\n";
+            g.DFS(startNode);
+            break;
 
-    g.printNetworkTopology(nodeNames, nodeRoles);
+        case 3:
+            cout << "Layer-by-Layer Network Inspection (BFS) from Node 0 (Gateway Router):\n";
+            cout << "Purpose: Check services by increasing 'distance'\n";
+            g.BFS(startNode);
+            break;
 
-    cout << "Network Trace (DFS) from Node 0 (Gateway Router):\n";
-    cout << "Purpose: Simulating a deep diagnostic path through the network\n";
-    g.DFS(0);
+        case 4:
+            cout << "Latency-Optimized Routes from Node 0 (Gateway Router):\n";
+            g.shortestPath(startNode);
+            break;
 
-    cout << "\nLayer-by-Layer Network Inspection (BFS) from Node 0 (Gateway Router):\n";
-    cout << "Purpose: Checking which services are reachable by increasing 'distance'\n";
-    g.BFS(0);
+        case 5:
+            cout << "Core Network Links (Minimum Spanning Tree):\n";
+            g.minimumSpan(startNode);
+            break;
 
-    cout << "\nLatency-Optimized Routes from Node 0 (Gateway Router):\n";
-    g.shortestPath(0);
+        case 0:
+            cout << "Exiting program.\n";
+            break;
 
-    cout << "\nCore Network Links (Minimum Spanning Tree):\n";
-    g.minimumSpan(0);
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+         }
+        } while (choice != 0);
 
     return 0;
 }
