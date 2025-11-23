@@ -206,5 +206,8 @@ int main() {
     cout << "Purpose: Checking which services are reachable by increasing 'distance'\n";
     g.BFS(0);
 
+    cout << "\nLatency-Optimized Routes from Node 0 (Gateway Router):\n";
+    g.shortestPath(0);
+
     return 0;
 }
