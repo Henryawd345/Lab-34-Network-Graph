@@ -81,10 +81,42 @@ public:
 
         priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
 
-        
+        key[start] = 0;
+        pq.push({0, start});
 
+        while (!pq.empty()){
+            auto [k, u] = pq.top();
+            pq.pop();
+
+            if (inMST[u]) continue;
+            inMST[u] = true;
+
+            for (const auto &edge : adj[u]) {
+                int v = edge.first;
+                int w = edge.second;
+
+                if (!inMST[v] && w < key[v]) {
+                    key[v] = w;
+                    parent[v] = u;
+                    pq.push({key[v], v});
+                }
+            }
+        }
+
+        cout << "\nMinimum Spanning Tree edges (starting from node " << start << "):\n";
+
+        for (int v = 0; v < V; ++v) {
+            if (v == start) continue;
+            if (parent[v] == -1) {
+                
+                cout << "Node " << v << " is not connected to the MST from start node "
+                    << start << ".\n";
+            } else {
+                cout << "Edge from " << v << " to " << parent[v]
+                    << " with latency: " << key[v] << " ms\n";
+            }
+        }
     }
-
     
     void printNetworkTopology(const vector<string>& nodeNames, const vector<string>& nodeRoles) const {
     cout << "Data Center Network Topology:\n";
@@ -223,6 +255,9 @@ int main() {
 
     cout << "\nLatency-Optimized Routes from Node 0 (Gateway Router):\n";
     g.shortestPath(0);
+
+    cout << "\nCore Network Links (Minimum Spanning Tree):\n";
+    g.minimumSpan(0);
 
     return 0;
 }
