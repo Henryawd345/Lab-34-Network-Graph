@@ -58,6 +58,7 @@ public:
             }
         }
 
+
         cout << "\nShortest path from node " << start << ":\n";
         for (int i = 0; i < V; ++i) {
             if (dist[i] == hugeNum) {
@@ -71,6 +72,20 @@ public:
 
     }
 
+    void minimumSpan(int start = 0) const{
+        const int bigNum = 1e9;
+
+        vector<int> key(V, bigNum);    
+        vector<int> parent(V, -1); 
+        vector<bool> inMST(V, false);
+
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+
+        
+
+    }
+
+    
     void printNetworkTopology(const vector<string>& nodeNames, const vector<string>& nodeRoles) const {
     cout << "Data Center Network Topology:\n";
     cout << "=============================\n";
