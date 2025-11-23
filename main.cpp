@@ -36,6 +36,8 @@ public:
         vector<bool> visited(V, false);
         stack<int> st;
 
+        st.push(start);
+
         cout << "DFS starting from vertex " << start << ":" << endl;
 
         while (!st.empty()) {
@@ -86,21 +88,33 @@ public:
 
 int main() {
 
-    Graph g(7);
+    Graph g(9);
 
     
-    g.addEdge(0, 1, 12);
-    g.addEdge(0, 2, 8);
-    g.addEdge(0, 3, 21);
+     // 0 --> (1, 8) (2, 21)
+    g.addEdge(0, 1, 8);
+    g.addEdge(0, 2, 21);
 
-    g.addEdge(2, 3, 6);
-    g.addEdge(2, 6, 2);
-    g.addEdge(2, 4, 4);
-    g.addEdge(2, 5, 5);
-    
-    g.addEdge(4, 5, 9);
+    // 1 --> (0, 8) (2, 6) (3, 5) (4, 4)
+    g.addEdge(1, 2, 6);
+    g.addEdge(1, 3, 5);
+    g.addEdge(1, 4, 4);
 
-    g.addEdge(5, 6, 6);
+    // 2 --> (0, 21) (1, 6) (7, 11) (8, 8)
+    g.addEdge(2, 7, 11);
+    g.addEdge(2, 8, 8);
+
+    // 3 --> (1, 5) (4, 9)
+    g.addEdge(3, 4, 9);
+
+    // 5 --> (6, 10) (7, 15) (8, 5)
+    g.addEdge(5, 6, 10);
+    g.addEdge(5, 7, 15);
+    g.addEdge(5, 8, 5);
+
+    // 6 --> (5, 10) (7, 3) (8, 7)
+    g.addEdge(6, 7, 3);
+    g.addEdge(6, 8, 7);
 
     g.printAdjacencyList();
     g.DFS(0);
