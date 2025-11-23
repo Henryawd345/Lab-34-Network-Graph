@@ -43,7 +43,7 @@ public:
         for (const auto& edge : adj[i]) {
             int neighbor = edge.first;
             int latency = edge.second;
-            cout << "  → Node " << neighbor << " (" << nodeNames[neighbor]
+            cout << "  -> Node " << neighbor << " (" << nodeNames[neighbor]
                  << ") - Latency: " << latency << " ms\n";
             }
         cout << endl;
@@ -133,8 +133,38 @@ int main() {
     g.addEdge(6, 7, 3);
     g.addEdge(6, 8, 7);
 
-    g.printAdjacencyList();
+    vector<string> nodeNames = {
+        "Gateway Router",   
+        "Auth Server",      
+        "Database Cluster",  
+        "Logging Service",  
+        "Cache Server",     
+        "Media Server",      
+        "Analytics Node",  
+        "Backup Server",     
+        "API Server"         
+    };
+
+    vector<string> nodeRoles = {
+        "External entry point",
+        "User authentication",
+        "Stores application data",
+        "Collects system logs",
+        "Speeds up frequent reads",
+        "Serves videos & images",
+        "Runs reports & ML jobs",
+        "Stores long-term backups",
+        "Handles client API calls"
+    };
+
+    g.printNetworkTopology(nodeNames, nodeRoles);
+
+    cout << "Network Trace (DFS) from Node 0 (Gateway Router):\n";
+    cout << "Purpose: Simulating a deep diagnostic path through the network\n";
     g.DFS(0);
+
+    cout << "\nLayer-by-Layer Network Inspection (BFS) from Node 0 (Gateway Router):\n";
+    cout << "Purpose: Checking which services are reachable by increasing 'distance'\n";
     g.BFS(0);
 
     return 0;
