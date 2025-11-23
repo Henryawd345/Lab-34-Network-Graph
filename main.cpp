@@ -32,6 +32,45 @@ public:
         }
     }
 
+    void shortestPath(int start) const {
+        const int hugeNum = 1e9;
+        vector<int> dist(V, hugeNum);
+        dist[start] = 0;
+
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+
+        pq.push({0, start});
+
+        while (!pq.empty()){
+            auto [d, u] = pq.top();
+            pq.pop();
+
+            if (d > dist[u]) continue; // stale entry
+
+            for (const auto &edge : adj[u]) {
+                int v = edge.first;
+                int w = edge.second;
+
+                if (dist[u] + w < dist[v]) {
+                    dist[v] = dist[u] + w;
+                    pq.push({dist[v], v});
+                }
+            }
+        }
+
+        cout << "\nShortest path from node " << start << ":\n";
+        for (int i = 0; i < V; ++i) {
+            if (dist[i] == hugeNum) {
+                cout << start << " -> " << i << " : "
+                    << "unreachable" << endl;
+            } else {
+                cout << start << " -> " << i << " : "
+                    << dist[i] << endl;
+            }
+        }
+
+    }
+
     void printNetworkTopology(const vector<string>& nodeNames, const vector<string>& nodeRoles) const {
     cout << "Data Center Network Topology:\n";
     cout << "=============================\n";
